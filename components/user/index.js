@@ -1,0 +1,1 @@
+export { default as ProfileListComponent } from "./Search/ProfileList";

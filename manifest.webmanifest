@@ -1,0 +1,9 @@
+{
+    "name": "Wedding",
+    "short_name": "Wed",
+    "theme_color": "#11222f",
+    "background_color": "#acc9df",
+    "display": "fullscreen",
+    "scope": "http://localhost:8080/",
+    "start_url": "http://localhost:8080/"
+  }
