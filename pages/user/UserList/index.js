@@ -21,7 +21,6 @@ class ProfileListPage extends React.Component {
     return { pathname };
   }
   GetUserList = (page = 1, other_parameter = {}) => {
-    
     this.setState({ loading: true });
     getUserList(this.state.limit, page, other_parameter).then((res) => {
       if (res.data.error) {

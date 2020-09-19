@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
-import { public_url } from "../util/constant";
 import { connect } from "react-redux";
 import { postUserDetailById } from "../util/Services/UserMaster";
 import { ActionLogin, ActionLogout } from "../Redux/Action/Login/index";
@@ -46,9 +45,11 @@ const Nav = (props) => {
             <nav class="header-nav">
               <ul>
                 <li>
-                  <a href="/" class="header-nav-link">
-                    HOME
-                  </a>
+                  <Link href="/">
+                    <a href="javascript:void(0)" class="header-nav-link">
+                      HOME
+                    </a>
+                  </Link>
                 </li>
                 <li>
                   <Link href="/user" class="header-nav-link">
@@ -59,7 +60,7 @@ const Nav = (props) => {
                 </li>
                 <li>
                   {!props.Login.login ? (
-                    <Link href={"/login"}>
+                    <Link href="/login">
                       <a href="Javascript:Void(0)" class="header-nav-link">
                         Login
                       </a>

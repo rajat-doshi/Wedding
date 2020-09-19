@@ -64,7 +64,7 @@ const VerifyOtpComponent = (props) => {
           te(res.data.message);
         } else {
           localStorage.setItem("token", res.data.data.token);
-          Router.push("/forgot-password/change-password");
+          Router.push(`/forgot-password/change-password`);
           ts(res.data.message);
         }
         state.loading = false;
