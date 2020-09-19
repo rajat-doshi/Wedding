@@ -1,14 +1,17 @@
 import { post, get } from "./httpIntercepter";
 export const getUserList = (limit = 0, page = 0, other_parameter = {}) => {
-  let query = ``;
+  console.log("other_parameter", other_parameter);
+  let query = `/user-list?limit=${limit}&page=${page}`;
   if (other_parameter.from_age) {
-    query += `&from_age${other_parameter.from_age}`;
+    query = query + `&from_age=${other_parameter.from_age}`;
   }
-
   if (other_parameter.to_age) {
-    query += `&to_age${other_parameter.from_age}`;
+    query = query + `&to_age=${other_parameter.to_age}`;
   }
-  return get(`/user-list?limit=${limit}&page=${page}`).then((res) => {
+  if (other_parameter.religion) {
+    query = query + `&religion=${other_parameter.religion}`;
+  }
+  return get(query).then((res) => {
     console.log("getUserList", res);
     return res;
   });

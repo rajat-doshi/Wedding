@@ -10,11 +10,12 @@ import {
   postProfilePhotoUpload,
 } from "../../../util/Services/UserMaster";
 import {
-  HeightDropDown,
+  Gender,
   Occuption,
   MarriedUnmarriedBrotherSister,
   Weight,
   Height,
+  Religion,
 } from "../../../util/constant";
 import { connect } from "react-redux";
 
@@ -24,6 +25,7 @@ const initState = {
     last_name: "",
     height: "",
     weight: "",
+    gender: "",
     occuption: "",
     income: "",
     father_name: "",
@@ -41,16 +43,21 @@ const initState = {
     zipcode: "",
     address: "",
     father_job_profile: "",
-    job_profile:"",
+    job_profile: "",
+    birth_date: "",
+    city: "",
+    state: "",
+    religion:"",
     errors: {
       fisrt_name: null,
       last_name: null,
       height: null,
+      gender: null,
       weight: null,
       occuption: null,
       income: null,
       father_job_profile: null,
-      job_profile:null,
+      job_profile: null,
       father_name: null,
       mother_name: null,
       father_occuption: null,
@@ -66,6 +73,10 @@ const initState = {
       zipcode: null,
       address: null,
       father_job_profile: null,
+      birth_date: null,
+      city: null,
+      state: null,
+      religion:null
     },
   },
   loading: false,
@@ -134,7 +145,6 @@ const Edit = (props) => {
       if (res.error) {
         return;
       }
-
       if (res.data.error) {
         te(res.data.message);
       } else {
@@ -189,6 +199,37 @@ const Edit = (props) => {
           </div>
           <div className="row">
             <div className="col-lg-6">
+              <Input
+                className="form-control"
+                placeholder="Birth Date"
+                title="Birth Date"
+                type="date"
+                onChangeFunc={onInputChange}
+                validationFunc={onInputValidate}
+                name=""
+                value={form.birth_date}
+                error={form.errors.birth_date}
+                isReq={true}
+                name="birth_date"
+              />
+            </div>
+            <div className="col-lg-6">
+              <Select
+                options={Gender}
+                className="form-control"
+                title="Gender"
+                onChangeFunc={onInputChange}
+                validationFunc={onInputValidate}
+                name=""
+                value={form.gender}
+                error={form.errors.gender}
+                isReq={true}
+                name="gender"
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-6">
               <Select
                 options={Height()}
                 className="form-control"
@@ -218,6 +259,23 @@ const Edit = (props) => {
               />
             </div>
           </div>
+          <div className="row">
+            <div className="col-lg-6">
+              <Select
+                options={Religion}
+                className="form-control"
+                placeholder="Religion"
+                title="Religion"
+                onChangeFunc={onInputChange}
+                validationFunc={onInputValidate}
+                name=""
+                value={form.religion}
+                error={form.errors.religion}
+                isReq={true}
+                name="religion"
+              />
+            </div>
+            </div>
           <div className="row">
             <div className="col-lg-6">
               <Select
@@ -463,7 +521,36 @@ const Edit = (props) => {
             </div>
           </div>
           <hr />
-
+          <div className="row">
+            <div className="col-lg-6">
+              <Input
+                className="form-control"
+                placeholder="City"
+                title="City"
+                onChangeFunc={onInputChange}
+                validationFunc={onInputValidate}
+                name=""
+                value={form.city}
+                error={form.errors.city}
+                isReq={true}
+                name="city"
+              />
+            </div>
+            <div className="col-lg-6">
+              <Input
+                className="form-control"
+                placeholder="State"
+                title="State"
+                onChangeFunc={onInputChange}
+                validationFunc={onInputValidate}
+                name=""
+                value={form.state}
+                error={form.errors.state}
+                isReq={true}
+                name="state"
+              />
+            </div>
+          </div>
           <div className="row">
             <div className="col-lg-4">
               <Input

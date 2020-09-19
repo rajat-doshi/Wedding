@@ -7,10 +7,9 @@ export default class Search extends React.Component {
     return { pathname };
   }
   render() {
-    console.log("Hello", this.props);
     return (
       <React.Fragment>
-        <Head title="Home" />
+        <Head title="User  List" />
         <Nav />
         <ProfileListComponent />
       </React.Fragment>

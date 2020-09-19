@@ -55,3 +55,7 @@ export const Religion = [
   { value: 1, label: "Jain Digamber" },
   { value: 2, label: "Jain Shwetamber" },
 ];
+export const Gender = [
+  { value: 1, label: "Male" },
+  { value: 2, label: "Female" },
+];

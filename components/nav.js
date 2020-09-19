@@ -61,19 +61,44 @@ const Nav = (props) => {
                   </a>
                 </li>
                 <li>
-                <Link href={"/login"}>
-                  <a href="Javascript:Void(0)" class="header-nav-link">
-                    Login
-                  </a>
-                  </Link>
+                  {!props.Login.login ? (
+                    <Link href={"/login"}>
+                      <a href="Javascript:Void(0)" class="header-nav-link">
+                        Login
+                      </a>
+                    </Link>
+                  ) : (
+                    <a
+                      href="Javascript:Void(0)"
+                      class="header-nav-link"
+                      onClick={Logout}
+                    >
+                      Logout
+                    </a>
+                  )}
                 </li>
               </ul>
             </nav>
-            <Link href={"/register"} class="header-link-action">
-              <a href="#" class="header-link-action">
-                <span>Registration</span>
+            {!props.Login.login ? (
+              <Link href={"/register"} class="header-link-action">
+                <a href="Javascript:void(0)" class="header-link-action">
+                  <span>Registration</span>
+                </a>
+              </Link>
+            ) : (
+              <a
+                href="Javascript:void(0)"
+                class="header-link-action"
+                onClick={() => {
+                  RouteChange("/user/profile/view");
+                }}
+              >
+                <span>
+                  {" "}
+                  {props.Login.fisrt_name} {props.Login.last_name}
+                </span>
               </a>
-            </Link>
+            )}
             <span class="icon icon-menu menu-mobile"></span>
           </div>
         </div>
