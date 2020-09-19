@@ -11,6 +11,9 @@ export const getUserList = (limit = 0, page = 0, other_parameter = {}) => {
   if (other_parameter.religion) {
     query = query + `&religion=${other_parameter.religion}`;
   }
+  if (other_parameter.gender) {
+    query = query + `&gender=${other_parameter.gender}`;
+  }
   return get(query).then((res) => {
     console.log("getUserList", res);
     return res;

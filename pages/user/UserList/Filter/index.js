@@ -1,6 +1,6 @@
 import React from "react";
 import Select from "../../../../components/Common/Select";
-import { Age, Religion } from "../../../../util/constant";
+import { Age, Religion, Gender } from "../../../../util/constant";
 class Filter extends React.Component {
   constructor() {
     super();
@@ -8,6 +8,7 @@ class Filter extends React.Component {
       from_age: 1,
       to_age: 100,
       religion: "",
+      gender: "",
     };
   }
   onChange = (name, value) => {
@@ -46,6 +47,17 @@ class Filter extends React.Component {
               title="Religion"
               name="religion"
               value={this.state.religion}
+              onChangeFunc={this.onChange}
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-lg-12">
+            <Select
+              options={Gender}
+              title="Gender"
+              name="gender"
+              value={this.state.gender}
               onChangeFunc={this.onChange}
             />
           </div>
