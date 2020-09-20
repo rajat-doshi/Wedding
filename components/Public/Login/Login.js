@@ -78,63 +78,90 @@ const LoginComponent = (props) => {
   };
 
   return (
-    <>
-    <div class="login-form form-main">
-      <div className="container">
-        <form
-          onSubmit={(e) => {
-            handleSubmit(e);
-          }}
-        >
-          <div className="row mt-2">
-            <div className="col-lg-12">
-              <Input
-                className="form-control"
-                placeholder="Email Address"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name="email_address"
-                value={form.email_address}
-                error={form.errors.email_address}
-                title="Email Address"
-              />
+    <div class="container-blog-posts">
+      <div class="container-awesome-company">
+        <div class="container">
+          <form
+            onSubmit={(e) => {
+              handleSubmit(e);
+            }}
+          >
+            <div class="row">
+              <div class="col-12 ">
+                <div class="small-form">
+                  <h1
+                    style={{
+                      color: "#e66288",
+                      fontSize: "30px",
+                      marginBottom: "30px",
+                    }}
+                  >
+                    LOGIN HERE
+                  </h1>
+                  <div class="control-holder">
+                    <Input
+                      className="form-control"
+                      placeholder="Email Address"
+                      onChangeFunc={onInputChange}
+                      validationFunc={onInputValidate}
+                      name="email_address"
+                      value={form.email_address}
+                      error={form.errors.email_address}
+                      title="Email Address"
+                    />
+                  </div>
+                  <div class="control-holder">
+                    <Input
+                      className="form-control"
+                      placeholder="Password"
+                      onChangeFunc={onInputChange}
+                      validationFunc={onInputValidate}
+                      name="password"
+                      value={form.password}
+                      error={form.errors.password}
+                      title="Password"
+                    />
+                  </div>
+                  <div class="control-holder">
+                    <label>
+                      <input class="checkbox-1" type="checkbox" /> Remember Me
+                    </label>
+                  </div>
+                  <div class="control-holder">
+                    <label>
+                      <Link href="/forgot-password"> Forgot password</Link>
+                    </label>
+                  </div>
+
+                  <button
+                    type="submit"
+                    class="search-job-form-button"
+                    style={{
+                      height: "51px",
+                      backgroundImage:
+                        "linear-gradient(90deg,#e44e78 0,#ce74ba)",
+                      textAlign: "center",
+                      padding: "0 17px",
+                      border: "none",
+                      outline: "none",
+                      fontSize: "14px",
+                      fontWeight: "700",
+                      letterSpacing: "1.4px",
+                      color: "#fff",
+                      cursor: "pointer",
+                      marginTop: "20px",
+                    }}
+                    disabled={state.loading}
+                  >
+                    {state.loading ? "Please wait..." : "LOGIN"}
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="row mt-2">
-            <div className="col-lg-12">
-              <Input
-                className="form-control"
-                placeholder="Password"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name="password"
-                value={form.password}
-                error={form.errors.password}
-                title="Password"
-              />
-            </div>
-          </div>
-          <div className="row mt-2">
-            <div className="col-lg-12">
-              <button
-                className="btn btn-primary form-control"
-                type="submit"
-                disabled={state.loading}
-              >
-                {state.loading ? "Please wait..." : "Login"}
-              </button>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-12">
-              <br/>
-             <Link href="/forgot-password"> Forgot password</Link>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-      </div>
-    </>
+    </div>
   );
 };
 
