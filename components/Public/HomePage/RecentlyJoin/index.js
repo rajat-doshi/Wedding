@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import Link from "next/link";
 const RecentlyJoin = (props) => {
   const [state, setState] = useState({ userList: [] });
-  const { userList } = state;
+  const { userList, loading } = state;
   const { Login } = props;
   useEffect(() => {
     GetUserList();
@@ -67,10 +67,19 @@ const RecentlyJoin = (props) => {
                 </div>
               </div>
             </div>
-
           </div>
         </div>
-
+        {loading && (
+          <div class="">
+            <div class="list-view-item">
+              <div class="row align-items-center">
+                <div class="col-12 col-md-4 col-xl-6">
+                  <h3>Loading...</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
         {userList.map((res) => {
           return (
             <div class="post-job-list-view">
