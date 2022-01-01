@@ -10,14 +10,14 @@ import { te, ts } from "../../../util/ReduxToaster";
 import  Router  from "next/router";
 
 const formData = {
-  fisrt_name: "",
+  first_name: "",
   last_name: "",
   mobile_number: "",
   address: "",
   email_address: "",
   password: "",
   errors: {
-    fisrt_name: null,
+    first_name: null,
     last_name: null,
     address: null,
     mobile_number: null,
@@ -63,7 +63,8 @@ class RegisterComponent extends React.Component {
     this.setState({ loading: true });
     let objForm = cloneDeep(obj);
     delete objForm.errors;
-    Register(obj).then((res) => {
+   
+    Register(objForm).then((res) => {
       if (res.error) {
         this.setState({ loading: false });
         return;
@@ -88,12 +89,12 @@ class RegisterComponent extends React.Component {
         <div className="container">
           <form onSubmit={this.handleSubmit}>
             <Input
-              name="fisrt_name"
-              value={form.fisrt_name}
+              name="first_name"
+              value={form.first_name}
               title="First Name"
               onChangeFunc={this.onInputChange}
               validationFunc={this.onInputValidate}
-              error={errors.fisrt_name}
+              error={errors.first_name}
               isReq={true}
             />
             <Input
@@ -159,10 +160,5 @@ class RegisterComponent extends React.Component {
     );
   }
 }
-RegisterComponent.getInitialProps = ({ store, isServer, pathname, query }) => {
-  // component will read from store's state when rendered
-  store.dispatch({ type: "FOO", payload: "foo" });
-  // pass some custom props to component from here
-  return { custom: "custom" };
-};
-export default withRedux(makeStore, (state) => state)(RegisterComponent);
+
+export default RegisterComponent;

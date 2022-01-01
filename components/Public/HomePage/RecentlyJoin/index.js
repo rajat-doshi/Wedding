@@ -16,7 +16,8 @@ const RecentlyJoin = (props) => {
     state.loading = true;
     setState({ ...state });
     getUserList(5, page, other_parameter).then((res) => {
-      if (res.data.error) {
+      if (!res.data) {
+        return
       } else {
         state.userList = res.data.data.records;
         state.loading = false;

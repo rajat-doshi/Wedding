@@ -53,8 +53,11 @@ const UserVerifyComponent = (props) => {
     if (obj) {
       state.loading = true;
       setState({ ...state });
+      console.log(window.location.search);
+      const urlSearchParams = new URLSearchParams(window.location.search);
+      const email_address = urlSearchParams.get('email-address')
       postUserVerify({
-        email_address: props.router.query["email-address"],
+        email_address: email_address,
         otp: obj.otp,
       }).then((res) => {
         if (res.error) {

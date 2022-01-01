@@ -13,7 +13,7 @@ class ProfileListPage extends React.Component {
       UserList: [],
       total_record: 0,
       active: 1,
-      limit: 1,
+      limit: 10,
       loading: false,
     };
   }
@@ -23,7 +23,8 @@ class ProfileListPage extends React.Component {
   GetUserList = (page = 1, other_parameter = {}) => {
     this.setState({ loading: true });
     getUserList(this.state.limit, page, other_parameter).then((res) => {
-      if (res.data.error) {
+      if (!res.data) {
+        return;
       } else {
         this.setState({
           UserList: res.data.data.records,

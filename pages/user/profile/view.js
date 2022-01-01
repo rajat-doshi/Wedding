@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import Head from "../../../components/head";
 import Footer from "../../../components/footer";
 import Nav from "../../../components/nav";
-import { withRouter } from "next/router";
+import { withRouter,useRouter  } from "next/router";
 import { postUserDetailById } from "../../../util/Services/UserMaster";
 import { te, ts } from "../../../util/ReduxToaster";
 import { cloneDeep } from "lodash";
 import { FileUrl } from "../../../util/Config";
+import {Provider} from "react-redux";
+import store from "../../../Redux"
 const initState = {
   user: {
-    fisrt_name: "",
+    first_name: "",
     last_name: "",
     height: "",
     weight: "",
@@ -36,20 +38,26 @@ const initState = {
 };
 const UserProfile = (props) => {
   const [state, setState] = useState(cloneDeep(initState));
+  const router = useRouter();
   useEffect(() => {
+   const params = new URL(window.location.href)
+   const userId = params.searchParams.get('id');
     state.loading = true;
     setState({ ...state });
     postUserDetailById({
-      _id: props.router.query.id
-        ? props.router.query.id
+      id: userId
+        ? userId
         : localStorage.getItem("token"),
     }).then((res) => {
+      console.log(res)
       if (res.error) {
         return;
       }
+
       if (res.data.error) {
         te(res.data.message);
       } else {
+        console.log("res.data.data",res.data.data)
         state.user = res.data.data;
         state.loading = false;
         setState({ ...state });
@@ -60,6 +68,7 @@ const UserProfile = (props) => {
 
   return (
     <>
+    <Provider store={store}>
       <Head />
       <Nav />
       <div class="container-job">
@@ -72,7 +81,7 @@ const UserProfile = (props) => {
                     <span>28 Yrs, </span>Hindu
                   </span>
                   <span class="title-job-post">
-                    {state.user.fisrt_name} {state.user.last_name}{" "}
+                    {state.user.first_name} {state.user.last_name}{" "}
                   </span>
                 </h2>
                 <div class="header-detail-info">
@@ -142,8 +151,10 @@ const UserProfile = (props) => {
         </div>
       </div>
       <Footer />
+      </Provider>
     </>
   );
 };
+
 
 export default withRouter(UserProfile);

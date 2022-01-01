@@ -39,7 +39,7 @@ export const postUserDetailById = (obj = {}) => {
 };
 
 export const postProfilePhotoUpload = (obj = {}) => {
-  return post(`/profile-photo-upload`, obj).then((res) => {
+  return post(`/user-update`, obj).then((res) => {
     console.log("postProfilePhotoUpload", res);
     return res;
   });

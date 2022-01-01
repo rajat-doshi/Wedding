@@ -1,13 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import Link from "next/link";
 import { connect } from "react-redux";
 import { postUserDetailById } from "../util/Services/UserMaster";
 import { ActionLogin, ActionLogout } from "../Redux/Action/Login/index";
+import ReduxToastr from 'react-redux-toastr'
 import Router from "next/router";
 const Nav = (props) => {
+    const [state,setState] = useState({token:""})
   useEffect(() => {
+     setState({token:localStorage.getItem("token")})
     if (localStorage.getItem("token")) {
-      postUserDetailById({ _id: localStorage.getItem("token") }).then((res) => {
+      postUserDetailById({token: localStorage.getItem("token") }).then((res) => {
         if (res.error) {
           return;
         }
@@ -26,8 +29,18 @@ const Nav = (props) => {
   const RouteChange = (url) => {
     Router.push(url);
   };
-
   return (
+    <>
+    <ReduxToastr
+      timeOut={4000}
+      newestOnTop={false}
+      preventDuplicates
+      position="top-left"
+      getState={(state) => state.toastr} // This is the default
+      transitionIn="fadeIn"
+      transitionOut="fadeOut"
+      progressBar
+      closeOnToastrClick/>    
     <header class="container-header">
       <div class="container">
         <div class="row no-gutters align-items-center">
@@ -59,7 +72,7 @@ const Nav = (props) => {
                   </Link>
                 </li>
                 <li>
-                  {!props.Login.login ? (
+                  {!state.token ? (
                     <Link href="/login">
                       <a href="Javascript:Void(0)" class="header-nav-link">
                         Login
@@ -77,7 +90,7 @@ const Nav = (props) => {
                 </li>
               </ul>
             </nav>
-            {!props.Login.login ? (
+            {!state.token? (
               <Link href={"/register"} class="header-link-action">
                 <a href="Javascript:void(0)" class="header-link-action">
                   <span>Registration</span>
@@ -92,8 +105,8 @@ const Nav = (props) => {
                 }}
               >
                 <span>
-                  {" "}
-                  {props.Login.fisrt_name} {props.Login.last_name}
+                  
+                  {props.Login.first_name} {props.Login.last_name}
                 </span>
               </a>
             )}
@@ -102,6 +115,7 @@ const Nav = (props) => {
         </div>
       </div>
     </header>
+    </>
   );
 };
 

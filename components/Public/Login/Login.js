@@ -47,15 +47,12 @@ const LoginComponent = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let { history } = props;
-    let formData = new FormData();
     const { form, id } = state;
-
     let obj = getFormDetails(form, onInputValidate);
     if (!obj) {
       te("Please Enter required field");
       return false;
     }
-
     if (obj) {
       state.loading = true;
       setState({ ...state });
@@ -67,8 +64,7 @@ const LoginComponent = (props) => {
           te(res.data.message);
         } else {
           Router.push("/user");
-          props.ActionLogin(res.data.data);
-          localStorage.setItem("token", res.data.data._id);
+          localStorage.setItem("token", res.data.data.token);
           ts(res.data.message);
         }
         state.loading = false;

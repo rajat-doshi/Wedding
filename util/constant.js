@@ -52,10 +52,10 @@ export const Age = () => {
   return AgeArr;
 };
 export const Religion = [
-  { value: 1, label: "Jain Digamber" },
-  { value: 2, label: "Jain Shwetamber" },
+  { value: "Jain Digamber", label: "Jain Digamber" },
+  { value: "Jain Shwetamber", label: "Jain Shwetamber" },
 ];
 export const Gender = [
-  { value: 1, label: "Male" },
-  { value: 2, label: "Female" },
+  { value: "Male", label: "Male" },
+  { value: "Female", label: "Female" },
 ];

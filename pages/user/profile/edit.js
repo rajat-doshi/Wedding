@@ -8,6 +8,7 @@ import { te, ts } from "../../../util/ReduxToaster";
 import {
   postProfileUpdate,
   postProfilePhotoUpload,
+  postUserDetailById,
 } from "../../../util/Services/UserMaster";
 import {
   Gender,
@@ -17,11 +18,12 @@ import {
   Height,
   Religion,
 } from "../../../util/constant";
-import { connect } from "react-redux";
+import { connect,Provider } from "react-redux";
+import store from "../../../Redux/index"
 
 const initState = {
   form: {
-    fisrt_name: "",
+    first_name: "",
     last_name: "",
     height: "",
     weight: "",
@@ -49,7 +51,7 @@ const initState = {
     state: "",
     religion:"",
     errors: {
-      fisrt_name: null,
+      first_name: null,
       last_name: null,
       height: null,
       gender: null,
@@ -86,14 +88,25 @@ const Edit = (props) => {
   let { form } = state;
 
   useEffect(() => {
-    let newDefaults = _.assign(state.form, props.Login);
-    state.form = newDefaults;
-    setState({ ...state });
+    const {form} = state;
+    postUserDetailById(
+      {
+        token:localStorage.getItem('token')
+      }
+    ).then(res=>{
+      if(res.data.error)
+      return;
+      if(res.data.data)
+      {
+        setState({ ...state,form:{...form,...res.data.data} });
+      }
+    })
+   
   }, [props.Login]);
+
   const onInputChange = (name, value, error = undefined) => {
     const { form } = state;
     form[name] = value;
-
     if (error !== undefined) {
       let { errors } = form;
       errors[name] = error;
@@ -113,12 +126,12 @@ const Edit = (props) => {
     const { form, id } = state;
 
     let obj = getFormDetails(form, onInputValidate);
-    if (!obj) {
-      te("Please Enter required field");
-      return false;
-    }
-    if (obj) {
-      postProfileUpdate({ _id: localStorage.getItem("token"), ...obj }).then(
+    // if (!obj) {
+    //   te("Please Enter required field");
+    //   return false;
+    // }
+    if (true) {
+      postProfileUpdate({token: localStorage.getItem("token"), ...form }).then(
         (res) => {
           if (res.error) {
             state.loading = false;
@@ -139,7 +152,7 @@ const Edit = (props) => {
   const ProfileImageUpload = (e) => {
     let formData = new FormData();
 
-    formData.append("profile_picture", e.target.files[0]);
+    formData.append("image", e.target.files[0]);
     formData.append("_id", localStorage.getItem("token"));
     postProfilePhotoUpload(formData).then((res) => {
       if (res.error) {
@@ -155,6 +168,7 @@ const Edit = (props) => {
 
   return (
     <>
+    <Provider store={store}>
       <Head /> <Nav />
       <div className="container mt-3">
         <form onSubmit={handleSubmit}>
@@ -162,7 +176,7 @@ const Edit = (props) => {
             <div className="col-lg-12">
               <input
                 type="file"
-                name="profile_image"
+                name="image"
                 onChange={ProfileImageUpload}
               />
             </div>
@@ -176,10 +190,10 @@ const Edit = (props) => {
                 onChangeFunc={onInputChange}
                 validationFunc={onInputValidate}
                 name=""
-                value={form.fisrt_name}
-                error={form.errors.fisrt_name}
+                value={form.first_name}
+                error={form.errors.first_name}
                 isReq={true}
-                name="fisrt_name"
+                name="first_name"
               />
             </div>
             <div className="col-lg-6">
@@ -591,8 +605,9 @@ const Edit = (props) => {
           </div>
         </form>
       </div>
+      </Provider>
     </>
   );
 };
 
-export default connect((state) => state, {})(Edit);
+export default Edit;

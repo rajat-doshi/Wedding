@@ -192,7 +192,7 @@ const Select = props => {
     }
   }
   if (inputProps.value == undefined) inputProps.value = null;
-  console.log("value",value)
+
   return (
     <div className="form-group">
       {title ? (
