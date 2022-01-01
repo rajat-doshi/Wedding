@@ -11,7 +11,7 @@ const Nav = (props) => {
      setState({token:localStorage.getItem("token")})
     if (localStorage.getItem("token")) {
       postUserDetailById({token: localStorage.getItem("token") }).then((res) => {
-        if (res.error) {
+        if (res.error||!res.data) {
           return;
         }
         if (res.data.error) {
