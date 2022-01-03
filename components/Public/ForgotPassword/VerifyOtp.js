@@ -8,10 +8,11 @@ import { withRouter } from "next/router";
 import { ActionLogin } from "../../../Redux/Action/Login/index";
 import { connect } from "react-redux";
 import Router from "next/router";
+import { Provider } from "react-redux";
+import store from "../../../Redux"
 const initState = {
   form: {
     otp: "",
-
     errors: {
       otp: null,
     },
@@ -21,19 +22,15 @@ const initState = {
 const VerifyOtpComponent = (props) => {
   const [state, setState] = useState(cloneDeep(initState));
   let { form } = state;
-
-  // handle change event
   const onInputChange = (name, value, error = undefined) => {
     const { form } = state;
     form[name] = value;
-
     if (error !== undefined) {
       let { errors } = form;
       errors[name] = error;
     }
     setState({ form });
   };
-  // handle validation
   const onInputValidate = (name, error) => {
     let { errors } = state.form;
     errors[name] = error;
@@ -41,15 +38,12 @@ const VerifyOtpComponent = (props) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const { form, id } = state;
-
     let obj = getFormDetails(form, onInputValidate);
     if (!obj) {
       te("Please Enter required field");
       return false;
     }
-
     if (obj) {
       state.loading = true;
       setState({ ...state });
@@ -75,42 +69,44 @@ const VerifyOtpComponent = (props) => {
 
   return (
     <>
-      <div class="login-form form-main">
-        <div className="container">
-          <form
-            onSubmit={(e) => {
-              handleSubmit(e);
-            }}
-          >
-            <div className="row mt-2">
-              <div className="col-lg-12">
-                <Input
-                  className="form-control"
-                  placeholder="Please enter otp"
-                  onChangeFunc={onInputChange}
-                  validationFunc={onInputValidate}
-                  name="otp"
-                  value={form.otp}
-                  error={form.errors.otp}
-                  title="Otp"
-                />
+      <Provider store={store}>
+        <div class="login-form form-main">
+          <div className="container">
+            <form
+              onSubmit={(e) => {
+                handleSubmit(e);
+              }}
+            >
+              <div className="row mt-2">
+                <div className="col-lg-12">
+                  <Input
+                    className="form-control"
+                    placeholder="Please enter otp"
+                    onChangeFunc={onInputChange}
+                    validationFunc={onInputValidate}
+                    name="otp"
+                    value={form.otp}
+                    error={form.errors.otp}
+                    title="Otp"
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="row mt-2">
-              <div className="col-lg-12">
-                <button
-                  className="btn btn-primary form-control"
-                  type="submit"
-                  disabled={state.loading}
-                >
-                  {state.loading ? "Please wait..." : "Sent otp"}
-                </button>
+              <div className="row mt-2">
+                <div className="col-lg-12">
+                  <button
+                    className="btn btn-primary form-control"
+                    type="submit"
+                    disabled={state.loading}
+                  >
+                    {state.loading ? "Please wait..." : "Sent otp"}
+                  </button>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
-      </div>
+      </Provider>
     </>
   );
 };

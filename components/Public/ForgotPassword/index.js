@@ -42,8 +42,6 @@ const ForgotPasswordComponent = (props) => {
     setState({ form: { ...state.form, errors: errors } });
   };
   const handleSubmit = (e) => {
-    e.preventDefault();
-
     const { form, id } = state;
 
     let obj = getFormDetails(form, onInputValidate);
@@ -77,11 +75,6 @@ const ForgotPasswordComponent = (props) => {
     <>
       <div class="login-form form-main">
         <div className="container">
-          <form
-            onSubmit={(e) => {
-              handleSubmit(e);
-            }}
-          >
             <div className="row mt-2">
               <div className="col-lg-12">
                 <Input
@@ -103,12 +96,12 @@ const ForgotPasswordComponent = (props) => {
                   className="btn btn-primary form-control"
                   type="submit"
                   disabled={state.loading}
+                  onClick={handleSubmit}
                 >
                   {state.loading ? "Please wait..." : "Sent otp"}
                 </button>
               </div>
             </div>
-          </form>
         </div>
       </div>
     </>

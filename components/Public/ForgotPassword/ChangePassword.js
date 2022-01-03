@@ -8,6 +8,8 @@ import { withRouter } from "next/router";
 import { ActionLogin } from "../../../Redux/Action/Login/index";
 import { connect } from "react-redux";
 import Router from "next/router";
+import {Provider} from "react-redux";
+import store from "../../../Redux/index"
 const initState = {
   form: {
     password: "",
@@ -73,6 +75,7 @@ const ChangePassword = (props) => {
 
   return (
     <>
+    <Provider store={store}>
       <div class="login-form form-main">
         <div className="container">
           <form
@@ -122,6 +125,7 @@ const ChangePassword = (props) => {
           </form>
         </div>
       </div>
+      </Provider>
     </>
   );
 };
