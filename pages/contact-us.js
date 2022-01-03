@@ -5,3 +5,4 @@ class ContactUs extends React.Component {
     return <React.Fragment>Comming soon</React.Fragment>;
   }
 }
+export default ContactUs;
