@@ -47,10 +47,12 @@ const Nav = (props) => {
           <div class="col-4 col-md-1 col-xl-2">
             <div class="header-logo">
               <h1>
-                <a href="home.html" class="logo-link">
+                <Link href="/" >
+                  <a class="logo-link">
                   <img src="/static/images/logo/logo-lifeline.png" alt="" />
                   <span>Life Line</span>
-                </a>
+                  </a>
+                </Link>
               </h1>
             </div>
           </div>

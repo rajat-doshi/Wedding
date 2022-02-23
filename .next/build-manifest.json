@@ -12,7 +12,11 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/user": [
+    "/next/dist/pages/_error": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/user/profile/edit": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],

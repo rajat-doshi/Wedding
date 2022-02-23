@@ -124,14 +124,15 @@ const Edit = (props) => {
     let { history } = props;
     let formData = new FormData();
     const { form, id } = state;
-
+    const newForm = {...form};
+    delete newForm.errors;
     let obj = getFormDetails(form, onInputValidate);
     // if (!obj) {
     //   te("Please Enter required field");
     //   return false;
     // }
     if (true) {
-      postProfileUpdate({token: localStorage.getItem("token"), ...form }).then(
+      postProfileUpdate({token: localStorage.getItem("token"), ...newForm }).then(
         (res) => {
           if (res.error) {
             state.loading = false;
