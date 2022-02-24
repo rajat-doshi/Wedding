@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getAllUserCount } from "../../../../util/Services/home";
 
 const Filter = () => {
+  const [userCount, setUserCount] = useState({
+    all_user_count: 0,
+    male_user_count: 0,
+    female_user_count: 0
+  });
+  const {
+    all_user_count,
+    male_user_count,
+    female_user_count
+  } = userCount;
+  useEffect(() => {
+    getAllUserCount().then(res => {
+      setUserCount({ ...res.data.data });
+    });
+  }, [])
   return (
     <div class="container-search-job">
       <div class="container">
@@ -100,26 +116,20 @@ const Filter = () => {
               <div class="row">
                 <div class="col-6 col-md-3">
                   <div class="search-job-statistics">
-                    <div class="text">USERS</div>
-                    <div class="num counter">10012</div>
+                    <div class="text">Total USERS</div>
+                    <div class="num counter">{all_user_count}</div>
                   </div>
                 </div>
                 <div class="col-6 col-md-3">
                   <div class="search-job-statistics">
-                    <div class="text">MARRIED</div>
-                    <div class="num counter">7989</div>
+                    <div class="text">Male</div>
+                    <div class="num counter">{male_user_count}</div>
                   </div>
                 </div>
                 <div class="col-6 col-md-3">
                   <div class="search-job-statistics">
-                    <div class="text">STATES</div>
-                    <div class="num counter">28</div>
-                  </div>
-                </div>
-                <div class="col-6 col-md-3">
-                  <div class="search-job-statistics">
-                    <div class="text">CASTE</div>
-                    <div class="num counter">319</div>
+                    <div class="text">Female</div>
+                    <div class="num counter">{female_user_count}</div>
                   </div>
                 </div>
               </div>

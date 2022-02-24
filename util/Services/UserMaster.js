@@ -1,6 +1,5 @@
 import { post, get } from "./httpIntercepter";
 export const getUserList = (limit = 0, page = 0, other_parameter = {}) => {
-  console.log("other_parameter", other_parameter);
   let query = `/user-list?limit=${limit}&page=${page}`;
   if (other_parameter.from_age) {
     query = query + `&from_age=${other_parameter.from_age}`;

@@ -34,7 +34,7 @@ const RecentlyJoin = (props) => {
           RECENTLY POSTED <span>PROFILES</span>
         </h3>
 
-        <div class="post-jobs-filter">
+        {/* <div class="post-jobs-filter">
           <div class="row no-gutters align-items-center">
             <div class="col-8 col-md-6 col-xl-4">
               <div class="row no-gutters">
@@ -69,7 +69,7 @@ const RecentlyJoin = (props) => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         {loading && (
           <div class="">
             <div class="list-view-item">
