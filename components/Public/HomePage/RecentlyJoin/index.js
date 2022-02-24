@@ -82,6 +82,7 @@ const RecentlyJoin = (props) => {
           </div>
         )}
         {userList.map((res) => {
+          console.log(res)
           return (
             <div class="post-job-list-view">
               <div class="list-view-item">
@@ -95,7 +96,7 @@ const RecentlyJoin = (props) => {
                       />
                       <div class="item-post">
                         <h4 class="post-name">
-                          <a href="job.html">{res.fisrt_name}</a>
+                          <a href="job.html">{res.first_name}</a>
                         </h4>
                         <span class="post-date">
                           {DateDiff(res.create_date)}
@@ -133,8 +134,7 @@ const RecentlyJoin = (props) => {
             </div>
           );
         })}
-
-        <div class="row">
+        {!loading && <div class="row">
           <div class="col-12 col-md-6 offset-md-3 col-xl-4 offset-xl-4 text-center">
             <Link href={!Login._id ? `/login` : "/user"}>
               <a href="Javascript:void(0)" class="button-fill post-job-more">
@@ -142,7 +142,7 @@ const RecentlyJoin = (props) => {
               </a>
             </Link>
           </div>
-        </div>
+        </div>}
       </div>
     </div>
   );

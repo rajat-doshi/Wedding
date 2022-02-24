@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link"
 export default function Footer() {
   return (
     <>
@@ -22,16 +23,16 @@ export default function Footer() {
                 <div class="contact-info">
                   <span class="icon icon-pin"></span>
                   <span class="contact-info-text">
-                    4127 Raoul Wallenber4127 Raoul Wallen berg Place
+                    opp jageshwar temple, near ayurvedic hospital, sabla, dungarpur, rajasthan 314022
                   </span>
                 </div>
                 <div class="contact-info">
                   <span class="icon icon-old-handphone"></span>
-                  <span class="contact-info-text">201-808-8888</span>
+                  <span class="contact-info-text">+91-7420038449</span>
                 </div>
                 <div class="contact-info">
                   <span class="icon icon-at"></span>
-                  <span class="contact-info-text">info@jobboarpsd.com</span>
+                  <span class="contact-info-text">rajatdoshi11@outlook.com</span>
                 </div>
               </div>
             </div>
@@ -39,59 +40,11 @@ export default function Footer() {
             <div class="col-6 col-lg-3">
               <ul class="footer-menu">
                 <li>
-                  <a href="home.html" title="">
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a href="#" title="">
-                    Testimonials
-                  </a>
-                </li>
-                <li>
-                  <a href="#" title="">
-                    Services & Features
-                  </a>
-                </li>
-                <li>
-                  <a href="#" title="">
-                    Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" title="">
-                    Returns
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div class="col-6 col-lg-2">
-              <ul class="footer-menu">
-                <li>
-                  <a href="#" title="">
-                    FAQs
-                  </a>
-                </li>
-                <li>
-                  <a href="#" title="">
-                    Contact Us
-                  </a>
-                </li>
-                <li>
-                  <a href="#" title="">
-                    Read Our Blog
-                  </a>
-                </li>
-                <li>
-                  <a href="#" title="">
-                    Our Office
-                  </a>
-                </li>
-                <li>
-                  <a href="#" title="">
-                    Join us
-                  </a>
+                  <Link href="/" >
+                    <a>
+                      Home
+                    </a>
+                  </Link>
                 </li>
               </ul>
             </div>

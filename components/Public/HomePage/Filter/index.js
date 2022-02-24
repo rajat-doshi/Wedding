@@ -108,11 +108,6 @@ const Filter = () => {
                   </div>
                 </form>
               </div>
-
-              <h3 class="search-job-title-new-job">
-                <span>500</span> couples got married in <span>7</span> days
-              </h3>
-
               <div class="row">
                 <div class="col-6 col-md-3">
                   <div class="search-job-statistics">

@@ -14,7 +14,7 @@ const Home = () => (
     <Head title="Home" />
     <Nav />
     <Filter />
-    <PartnerByReligion />
+    {/* <PartnerByReligion /> */}
     <RecentlyJoin />
     <Footer />
   </Provider>
