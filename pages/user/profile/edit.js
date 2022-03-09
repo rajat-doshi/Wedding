@@ -18,7 +18,7 @@ import {
   Height,
   Religion,
 } from "../../../util/constant";
-import { connect,Provider } from "react-redux";
+import { connect, Provider } from "react-redux";
 import store from "../../../Redux/index"
 
 const initState = {
@@ -49,7 +49,7 @@ const initState = {
     birth_date: "",
     city: "",
     state: "",
-    religion:"",
+    religion: "",
     errors: {
       first_name: null,
       last_name: null,
@@ -78,7 +78,7 @@ const initState = {
       birth_date: null,
       city: null,
       state: null,
-      religion:null
+      religion: null
     },
   },
   loading: false,
@@ -88,20 +88,19 @@ const Edit = (props) => {
   let { form } = state;
 
   useEffect(() => {
-    const {form} = state;
+    const { form } = state;
     postUserDetailById(
       {
-        token:localStorage.getItem('token')
+        token: localStorage.getItem('token')
       }
-    ).then(res=>{
-      if(res.data.error)
-      return;
-      if(res.data.data)
-      {
-        setState({ ...state,form:{...form,...res.data.data} });
+    ).then(res => {
+      if (res.data.error)
+        return;
+      if (res.data.data) {
+        setState({ ...state, form: { ...form, ...res.data.data } });
       }
     })
-   
+
   }, [props.Login]);
 
   const onInputChange = (name, value, error = undefined) => {
@@ -124,15 +123,17 @@ const Edit = (props) => {
     let { history } = props;
     let formData = new FormData();
     const { form, id } = state;
-    const newForm = {...form};
+    const newForm = { ...form };
     delete newForm.errors;
     let obj = getFormDetails(form, onInputValidate);
-    // if (!obj) {
-    //   te("Please Enter required field");
-    //   return false;
-    // }
+    if (!obj) {
+      te("Please Enter required field");
+      return false;
+    }
     if (true) {
-      postProfileUpdate({token: localStorage.getItem("token"), ...newForm }).then(
+      state.loading = true;
+      setState({ ...state });
+      postProfileUpdate({ token: localStorage.getItem("token"), ...newForm }).then(
         (res) => {
           if (res.error) {
             state.loading = false;
@@ -152,9 +153,8 @@ const Edit = (props) => {
   };
   const ProfileImageUpload = (e) => {
     let formData = new FormData();
-
-    formData.append("image", e.target.files[0]);
-    formData.append("_id", localStorage.getItem("token"));
+    formData.append("profile_picture", e.target.files[0]);
+    formData.append("token", localStorage.getItem("token"));
     postProfilePhotoUpload(formData).then((res) => {
       if (res.error) {
         return;
@@ -169,443 +169,439 @@ const Edit = (props) => {
 
   return (
     <>
-    <Provider store={store}>
-      <Head /> <Nav />
-      <div className="container mt-3">
-        <form onSubmit={handleSubmit}>
-          <div className="row">
-            <div className="col-lg-12">
-              <input
-                type="file"
-                name="image"
-                onChange={ProfileImageUpload}
-              />
+      <Provider store={store}>
+        <Head /> <Nav />
+        <div className="container mt-3">
+          <form onSubmit={handleSubmit}>
+            <div className="row">
+              <div className="col-lg-12">
+                <input
+                  type="file"
+                  name="image"
+                  onChange={ProfileImageUpload}
+                />
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-6">
-              <Input
-                className="form-control"
-                placeholder="First Name"
-                title="First Name"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.first_name}
-                error={form.errors.first_name}
-                isReq={true}
-                name="first_name"
-              />
+            <div className="row">
+              <div className="col-lg-6">
+                <Input
+                  className="form-control"
+                  placeholder="First Name"
+                  title="First Name"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  name=""
+                  value={form.first_name}
+                  error={form.errors.first_name}
+                  isReq={true}
+                  name="first_name"
+                />
+              </div>
+              <div className="col-lg-6">
+                <Input
+                  className="form-control"
+                  placeholder="Last Name"
+                  title="Last Name"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  name=""
+                  value={form.last_name}
+                  error={form.errors.last_name}
+                  isReq={true}
+                  name="last_name"
+                />
+              </div>
             </div>
-            <div className="col-lg-6">
-              <Input
-                className="form-control"
-                placeholder="Last Name"
-                title="Last Name"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.last_name}
-                error={form.errors.last_name}
-                isReq={true}
-                name="last_name"
-              />
+            <div className="row">
+              <div className="col-lg-6">
+                <Input
+                  className="form-control"
+                  placeholder="Birth Date"
+                  title="Birth Date"
+                  type="date"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  name=""
+                  value={form.birth_date}
+                  error={form.errors.birth_date}
+                  isReq={true}
+                  name="birth_date"
+                />
+              </div>
+              <div className="col-lg-6">
+                <Select
+                  options={Gender}
+                  className="form-control"
+                  title="Gender"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  name=""
+                  value={form.gender}
+                  error={form.errors.gender}
+                  isReq={true}
+                  name="gender"
+                />
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-6">
-              <Input
-                className="form-control"
-                placeholder="Birth Date"
-                title="Birth Date"
-                type="date"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.birth_date}
-                error={form.errors.birth_date}
-                isReq={true}
-                name="birth_date"
-              />
+            <div className="row">
+              <div className="col-lg-6">
+                <Select
+                  options={Height()}
+                  className="form-control"
+                  title="Height"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  name=""
+                  value={form.height}
+                  error={form.errors.height}
+                  isReq={true}
+                  name="height"
+                />
+              </div>
+              <div className="col-lg-6">
+                <Select
+                  options={Weight()}
+                  className="form-control"
+                  placeholder="Weight"
+                  title="Weight"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  name=""
+                  value={form.weight}
+                  error={form.errors.weight}
+                  isReq={true}
+                  name="weight"
+                />
+              </div>
             </div>
-            <div className="col-lg-6">
-              <Select
-                options={Gender}
-                className="form-control"
-                title="Gender"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.gender}
-                error={form.errors.gender}
-                isReq={true}
-                name="gender"
-              />
+            <div className="row">
+              <div className="col-lg-6">
+                <Select
+                  options={Religion}
+                  className="form-control"
+                  placeholder="Religion"
+                  title="Religion"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  name=""
+                  value={form.religion}
+                  error={form.errors.religion}
+                  isReq={true}
+                  name="religion"
+                />
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-6">
-              <Select
-                options={Height()}
-                className="form-control"
-                title="Height"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.height}
-                error={form.errors.height}
-                isReq={true}
-                name="height"
-              />
+            <div className="row">
+              <div className="col-lg-6">
+                <Select
+                  options={Occuption}
+                  className="form-control"
+                  placeholder="Occuption"
+                  title="Occuption"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  name=""
+                  value={form.occuption}
+                  error={form.errors.occuption}
+                  isReq={true}
+                  name="occuption"
+                />
+              </div>
+              <div className="col-lg-6">
+                <Input
+                  className="form-control"
+                  placeholder="Job Profile"
+                  title="Job Profile"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  name=""
+                  value={form.job_profile}
+                  error={form.errors.job_profile}
+                  isReq={true}
+                  name="job_profile"
+                />
+              </div>
+              <div className="col-lg-6">
+                <Input
+                  className="form-control"
+                  placeholder="Income"
+                  title="Income"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  name=""
+                  value={form.income}
+                  error={form.errors.income}
+                  isReq={true}
+                  name="income"
+                  type="number"
+                  type="number"
+                />
+              </div>
             </div>
-            <div className="col-lg-6">
-              <Select
-                options={Weight()}
-                className="form-control"
-                placeholder="Weight"
-                title="Weight"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.weight}
-                error={form.errors.weight}
-                isReq={true}
-                name="weight"
-              />
+            <hr />
+            <div className="row">
+              <div className="col-lg-6">
+                <Input
+                  className="form-control"
+                  placeholder="Father Name"
+                  title="Father Name"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  name=""
+                  value={form.father_name}
+                  error={form.errors.father_name}
+                  isReq={true}
+                  name="father_name"
+                />
+              </div>
+              <div className="col-lg-6">
+                <Input
+                  className="form-control"
+                  placeholder="Last Name"
+                  title="Last Name"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  name=""
+                  value={form.last_name}
+                  error={form.errors.last_name}
+                  isReq={true}
+                  name="last_name"
+                />
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-6">
-              <Select
-                options={Religion}
-                className="form-control"
-                placeholder="Religion"
-                title="Religion"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.religion}
-                error={form.errors.religion}
-                isReq={true}
-                name="religion"
-              />
+            <div className="row">
+              <div className="col-lg-6">
+                <Select
+                  options={Occuption}
+                  className="form-control"
+                  placeholder="Father Occuption"
+                  title="Father Occuption"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  name=""
+                  value={form.father_occuption}
+                  error={form.errors.father_occuption}
+                  isReq={true}
+                  name="father_occuption"
+                />
+              </div>
+              <div className="col-lg-6">
+                <Input
+                  className="form-control"
+                  placeholder="Job Profile"
+                  title="Job Profile"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  name=""
+                  value={form.father_job_profile}
+                  error={form.errors.father_job_profile}
+                  isReq={true}
+                  name="father_job_profile"
+                />
+              </div>
+              <div className="col-lg-6">
+                <Input
+                  className="form-control"
+                  placeholder="Income"
+                  title="Income"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  name=""
+                  value={form.father_income}
+                  error={form.errors.father_income}
+                  isReq={true}
+                  name="father_income"
+                  type="number"
+                />
+              </div>
             </div>
-            </div>
-          <div className="row">
-            <div className="col-lg-6">
-              <Select
-                options={Occuption}
-                className="form-control"
-                placeholder="Occuption"
-                title="Occuption"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.occuption}
-                error={form.errors.occuption}
-                isReq={true}
-                name="occuption"
-              />
-            </div>
-            <div className="col-lg-6">
-              <Input
-                className="form-control"
-                placeholder="Job Profile"
-                title="Job Profile"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.job_profile}
-                error={form.errors.job_profile}
-                isReq={true}
-                name="job_profile"
-              />
-            </div>
-            <div className="col-lg-6">
-              <Input
-                className="form-control"
-                placeholder="Income"
-                title="Income"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.income}
-                error={form.errors.income}
-                isReq={true}
-                name="income"
-                type="number"
-                type="number"
-              />
-            </div>
-          </div>
-          <hr />
-          <div className="row">
-            <div className="col-lg-6">
-              <Input
-                className="form-control"
-                placeholder="Father Name"
-                title="Father Name"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.father_name}
-                error={form.errors.father_name}
-                isReq={true}
-                name="father_name"
-              />
-            </div>
-            <div className="col-lg-6">
-              <Input
-                className="form-control"
-                placeholder="Last Name"
-                title="Last Name"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.last_name}
-                error={form.errors.last_name}
-                isReq={true}
-                name="last_name"
-              />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-6">
-              <Select
-                options={Occuption}
-                className="form-control"
-                placeholder="Father Occuption"
-                title="Father Occuption"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.father_occuption}
-                error={form.errors.father_occuption}
-                isReq={true}
-                name="father_occuption"
-              />
-            </div>
-            <div className="col-lg-6">
-              <Input
-                className="form-control"
-                placeholder="Job Profile"
-                title="Job Profile"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.father_job_profile}
-                error={form.errors.father_job_profile}
-                isReq={true}
-                name="father_job_profile"
-              />
-            </div>
-            <div className="col-lg-6">
-              <Input
-                className="form-control"
-                placeholder="Income"
-                title="Income"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.father_income}
-                error={form.errors.father_income}
-                isReq={true}
-                name="father_income"
-                type="number"
-              />
-            </div>
-          </div>
 
-          <div className="row">
-            <div className="col-lg-6">
-              <Input
-                className="form-control"
-                placeholder="Mother Name"
-                title="Mother Name"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.mother_name}
-                error={form.errors.mother_name}
-                isReq={true}
-                name="mother_name"
-              />
+            <div className="row">
+              <div className="col-lg-6">
+                <Input
+                  className="form-control"
+                  placeholder="Mother Name"
+                  title="Mother Name"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  name=""
+                  value={form.mother_name}
+                  error={form.errors.mother_name}
+                  isReq={true}
+                  name="mother_name"
+                />
+              </div>
+              <div className="col-lg-6">
+                <Select
+                  options={Occuption}
+                  className="form-control"
+                  placeholder="Mother Occuption"
+                  title="Mother Occuption"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  name=""
+                  value={form.mother_occuption}
+                  error={form.errors.mother_occuption}
+                  isReq={true}
+                  name="mother_occuption"
+                />
+              </div>
             </div>
-            <div className="col-lg-6">
-              <Select
-                options={Occuption}
-                className="form-control"
-                placeholder="Mother Occuption"
-                title="Mother Occuption"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.mother_occuption}
-                error={form.errors.mother_occuption}
-                isReq={true}
-                name="mother_occuption"
-              />
+            <div className="row">
+              <div className="col-lg-6">
+                <Input
+                  className="form-control"
+                  placeholder="Income"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  name=""
+                  value={form.mother_income}
+                  error={form.errors.mother_income}
+                  isReq={true}
+                  name="mother_income"
+                  type="number"
+                />
+              </div>
+              <div className="col-lg-6">
+                <Input
+                  className="form-control"
+                  placeholder="Job Profile"
+                  title="Job Profile"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  value={form.mother_job_profile}
+                  error={form.errors.mother_job_profile}
+                  isReq={true}
+                  name="mother_job_profile"
+                />
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-6">
-              <Input
-                className="form-control"
-                placeholder="Income"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.mother_income}
-                error={form.errors.mother_income}
-                isReq={true}
-                name="mother_income"
-                type="number"
-              />
+            <hr />
+            <div className="row">
+              <div className="col-lg-6">
+                <Select
+                  className="form-control"
+                  title="Married Brother"
+                  options={MarriedUnmarriedBrotherSister}
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  value={form.married_brother}
+                  error={form.errors.married_brother}
+                  isReq={true}
+                  name="married_brother"
+                />
+              </div>
+              <div className="col-lg-6">
+                <Select
+                  className="form-control"
+                  title="UnMarried Brother"
+                  options={MarriedUnmarriedBrotherSister}
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  value={form.unmarried_brother}
+                  error={form.errors.unmarried_brother}
+                  isReq={true}
+                  name="unmarried_brother"
+                />
+              </div>
             </div>
-            <div className="col-lg-6">
-              <Input
-                className="form-control"
-                placeholder="Job Profile"
-                title="Job Profile"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.mother_job_profile}
-                error={form.errors.mother_job_profile}
-                isReq={true}
-                name="mother_job_profile"
-              />
+            <div className="row">
+              <div className="col-lg-6">
+                <Select
+                  className="form-control"
+                  title="Married Sister"
+                  options={MarriedUnmarriedBrotherSister}
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  value={form.married_sister}
+                  error={form.errors.married_sister}
+                  isReq={true}
+                  name="married_sister"
+                />
+              </div>
+              <div className="col-lg-6">
+                <Select
+                  className="form-control"
+                  title="UnMarried Sister"
+                  options={MarriedUnmarriedBrotherSister}
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  value={form.unmarried_sister}
+                  error={form.errors.unmarried_sister}
+                  isReq={true}
+                  name="unmarried_sister"
+                />
+              </div>
             </div>
-          </div>
-          <hr />
-          <div className="row">
-            <div className="col-lg-6">
-              <Select
-                className="form-control"
-                title="Married Brother"
-                options={MarriedUnmarriedBrotherSister}
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.married_brother}
-                error={form.errors.married_brother}
-                isReq={true}
-                name="married_brother"
-              />
+            <hr />
+            <div className="row">
+              <div className="col-lg-6">
+                <Input
+                  className="form-control"
+                  placeholder="City"
+                  title="City"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  value={form.city}
+                  error={form.errors.city}
+                  isReq={true}
+                  name="city"
+                />
+              </div>
+              <div className="col-lg-6">
+                <Input
+                  className="form-control"
+                  placeholder="State"
+                  title="State"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  value={form.state}
+                  error={form.errors.state}
+                  isReq={true}
+                  name="state"
+                />
+              </div>
             </div>
-            <div className="col-lg-6">
-              <Select
-                className="form-control"
-                title="UnMarried Brother"
-                options={MarriedUnmarriedBrotherSister}
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                value={form.unmarried_brother}
-                error={form.errors.unmarried_brother}
-                isReq={true}
-                name="unmarried_brother"
-              />
+            <div className="row">
+              <div className="col-lg-4">
+                <Input
+                  className="form-control"
+                  placeholder="Zipcode"
+                  title="Zipcode"
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  name=""
+                  value={form.zipcode}
+                  error={form.errors.zipcode}
+                  isReq={true}
+                  name="zipcode"
+                />
+              </div>
+              <div className="col-lg-8">
+                <TextArea
+                  placeholder="Address"
+                  name="address"
+                  value={form.address}
+                  onChangeFunc={onInputChange}
+                  validationFunc={onInputValidate}
+                  error={form.errors.address}
+                  isReq={true}
+                  title="Address"
+                />
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-6">
-              <Select
-                className="form-control"
-                title="Married Sister"
-                options={MarriedUnmarriedBrotherSister}
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                value={form.married_sister}
-                error={form.errors.married_sister}
-                isReq={true}
-                name="married_sister"
-              />
+            <div className="row">
+              <div className="col-lg-12">
+                <button
+                  className="btn btn-primary form-control"
+                  disabled={state.loading}
+                >
+                  {state.loading ? "Please wait..." : "Submit"}
+                </button>
+              </div>
             </div>
-            <div className="col-lg-6">
-              <Select
-                className="form-control"
-                title="UnMarried Sister"
-                options={MarriedUnmarriedBrotherSister}
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                value={form.unmarried_sister}
-                error={form.errors.unmarried_sister}
-                isReq={true}
-                name="unmarried_sister"
-              />
-            </div>
-          </div>
-          <hr />
-          <div className="row">
-            <div className="col-lg-6">
-              <Input
-                className="form-control"
-                placeholder="City"
-                title="City"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.city}
-                error={form.errors.city}
-                isReq={true}
-                name="city"
-              />
-            </div>
-            <div className="col-lg-6">
-              <Input
-                className="form-control"
-                placeholder="State"
-                title="State"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.state}
-                error={form.errors.state}
-                isReq={true}
-                name="state"
-              />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-4">
-              <Input
-                className="form-control"
-                placeholder="Zipcode"
-                title="Zipcode"
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                name=""
-                value={form.zipcode}
-                error={form.errors.zipcode}
-                isReq={true}
-                name="zipcode"
-              />
-            </div>
-            <div className="col-lg-8">
-              <TextArea
-                placeholder="Address"
-                name="address"
-                value={form.address}
-                onChangeFunc={onInputChange}
-                validationFunc={onInputValidate}
-                error={form.errors.address}
-                isReq={true}
-                title="Address"
-              />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-12">
-              <button
-                className="btn btn-primary form-control"
-                disabled={state.loading}
-              >
-                {state.loading ? "Please wait..." : "Submit"}
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
+          </form>
+        </div>
       </Provider>
     </>
   );

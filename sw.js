@@ -118,10 +118,10 @@ define("./sw.js",['./workbox-e536220e'], function (workbox) { 'use strict';
     "revision": "0d6dc13fb8d062816b751c13732fed4b"
   }, {
     "url": "/_next/static/runtime/webpack.js",
-    "revision": "f5741847a9c16766e8271150b9739f32"
+    "revision": "996586b4dde2894def02febfc1c01627"
   }, {
     "url": "/_next/static/runtime/webpack.js.map",
-    "revision": "529749df1df199377404a4920f9bf3d8"
+    "revision": "78fb773b13b289a3c355c403417eb344"
   }], {
     "ignoreURLParametersMatching": [/ts/]
   });

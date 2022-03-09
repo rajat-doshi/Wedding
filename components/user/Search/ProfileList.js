@@ -22,13 +22,8 @@ class ProfileListComponent extends React.Component {
                     <div class="row align-items-center no-gutters">
                       <div class="col-12 col-md-4 col-xl-6">
                         <div class="item-post-job">
-                          {/* <img
-                            src={FileUrl + res.profile_picture}
-                            alt=""
-                            class="item-logo"
-                          /> */}
                             <img
-                            src="https://www.seekpng.com/png/detail/18-187370_johnny-bravo-head-johnny-bravo.png"
+                            src={FileUrl+user.profile_picture}
                             alt={user.first_name}
                             class="item-logo"
                           />
@@ -42,7 +37,6 @@ class ProfileListComponent extends React.Component {
                           </div>
                         </div>
                       </div>
-
                       <div class="col-12 col-md-8 col-xl-6">
                         <div class="row no-gutters">
                           {user.city && user.state && (
@@ -55,22 +49,18 @@ class ProfileListComponent extends React.Component {
                               </div>
                             </div>
                           )}
-
                           {user.birth_date && (
                             <div class="col-12 col-md-3">
                               <div class="item-time-type">
                                 <span class="icon icon-tag-black-shape"></span>
-
                                 <span class="type-text">
                                   {DateDiff(user.birth_date, "days")} Yrs.
                                 </span>
                               </div>
                             </div>
                           )}
-
                           <div
-                            class="col-12 col-md-4 text-sm-center text-md-right"
-                          
+                            class="col-12 col-md-4 text-sm-center text-md-right"                      
                           >
                             <Link href={{ pathname: `/user/profile/view`, query: { id: user.id } }} class="button-outline">
                               <span>View Profile</span>
