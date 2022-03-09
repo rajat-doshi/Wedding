@@ -1,5 +1,12 @@
-
-export const Api_Url = `http://${typeof window !== "undefined" && window.location.hostname
+let api_url = `http://${typeof window !== "undefined" && window.location.hostname
   }:3001`;
-export const FileUrl = `http://${typeof window !== "undefined" && window.location.hostname
-  }:3001/files/`;
+let file_url =  `http://${typeof window !== "undefined" && window.location.hostname
+}:3001/files/`;
+if(typeof window !== "undefined"){
+   if(window.location.hostname!=="localhost"){
+     api_url='http://3.111.188.157:3001';
+     file_url = 'http://3.111.188.157:3001/files';
+   }
+}
+export const Api_Url = api_url;
+export const FileUrl = file_url;
