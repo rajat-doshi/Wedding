@@ -1,11 +1,3 @@
 /node_modules
 /.next/
-/out/
 /static/
-/sw.js.map
-/public
-/sw.js
-/workbox-c2b5e142.js
-/workbox-e536220e.js
-/workbox-e536220e.js.map
-
