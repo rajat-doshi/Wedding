@@ -61,7 +61,7 @@ const Nav = (props) => {
               <ul>
                 <li>
                   <Link href="/">
-                    <a href="javascript:void(0)" class="header-nav-link">
+                    <a href="javascript:void(0)" >
                       HOME
                     </a>
                   </Link>

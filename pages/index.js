@@ -10,14 +10,12 @@ import store from "../Redux";
 import ReduxHoc from "./ReduxHoc";
 const Home = () => (
   <>
-  <Provider store={store}>
-    <Head title="Home" />
+  
     <Nav />
     <Filter />
     {/* <PartnerByReligion /> */}
     <RecentlyJoin />
     <Footer />
-  </Provider>
   </>
 );
 

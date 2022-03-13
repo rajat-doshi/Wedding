@@ -11,11 +11,11 @@ export default class Search extends React.Component {
   render() {
     return (
       <React.Fragment>
-      <Provider store={store}>
-        <Head title="User  List" />
+    
+        {/* <Head title="User  List" /> */}
         <Nav />
         <ProfileListComponent />
-        </Provider>
+      
       </React.Fragment>
     );
   }

@@ -19,8 +19,8 @@ import {
   Religion,
 } from "../../../util/constant";
 import { connect, Provider } from "react-redux";
-import store from "../../../Redux/index"
-
+import store from "../../../Redux/index";
+import {userDetailsFields} from "../../../Constant/profileEdit";
 const initState = {
   form: {
     first_name: "",
@@ -169,8 +169,8 @@ const Edit = (props) => {
 
   return (
     <>
-      <Provider store={store}>
-        <Head /> <Nav />
+    
+        
         <div className="container mt-3">
           <form onSubmit={handleSubmit}>
             <div className="row">
@@ -182,36 +182,36 @@ const Edit = (props) => {
                 />
               </div>
             </div>
-            <div className="row">
-              <div className="col-lg-6">
-                <Input
-                  className="form-control"
-                  placeholder="First Name"
-                  title="First Name"
-                  onChangeFunc={onInputChange}
-                  validationFunc={onInputValidate}
-                  name=""
-                  value={form.first_name}
-                  error={form.errors.first_name}
-                  isReq={true}
-                  name="first_name"
-                />
+            {userDetailsFields.map((res,index)=>{
+              const {name} = res;
+              if(index==userDetailsFields.length-1&&index+1%2==0)
+              {return}
+              const nextField = userDetailsFields[index+1]
+              return(
+                <>
+              <div className="row">
+                <div className="col-lg-6">
+                    <Input
+                    {...res}
+                      onChangeFunc={onInputChange}
+                      validationFunc={onInputValidate}
+                      value={form[name]}
+                      error={form.errors[name]}
+                    />
+                  </div>
+                  {nextField&&<div className="col-lg-6">
+                    <Input
+                      {...nextField}
+                      onChangeFunc={onInputChange}
+                      validationFunc={onInputValidate}
+                      value={form[nextField.name]}
+                      error={form.errors[nextField.name]}
+                    />
+                  </div>}
               </div>
-              <div className="col-lg-6">
-                <Input
-                  className="form-control"
-                  placeholder="Last Name"
-                  title="Last Name"
-                  onChangeFunc={onInputChange}
-                  validationFunc={onInputValidate}
-                  name=""
-                  value={form.last_name}
-                  error={form.errors.last_name}
-                  isReq={true}
-                  name="last_name"
-                />
-              </div>
-            </div>
+              </>                                                      
+              )
+            })}
             <div className="row">
               <div className="col-lg-6">
                 <Input
@@ -602,7 +602,6 @@ const Edit = (props) => {
             </div>
           </form>
         </div>
-      </Provider>
     </>
   );
 };

@@ -1,7 +1,5 @@
-let api_url = `http://${typeof window !== "undefined" && window.location.hostname
-  }:3001`;
-let file_url =  `http://${typeof window !== "undefined" && window.location.hostname
-}:3001/files/`;
+let api_url = `http://3.111.188.157:3001`;
+let file_url =  `http://3.111.188.157:3001/files/`;
 if(typeof window !== "undefined"){
    if(window.location.hostname!=="localhost"){
      api_url='http://3.111.188.157:3001';

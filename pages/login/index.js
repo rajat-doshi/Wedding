@@ -9,17 +9,15 @@ import { ts, te } from "../../util/ReduxToaster";
 import Nav from "../../components/nav";
 import { postLogin } from "../../util/Services/UserMaster";
 import LoginComponent from "../../components/Public/Login/Login";
-import {Provider} from "react-redux";
+import { Provider } from "react-redux";
 import store from "../../Redux"
 
 const Login = (props) => {
   return (
     <>
-    <Provider store={store}>
-      <Head />
       <Nav />
       <LoginComponent />
-    </Provider>
+
     </>
   );
 };

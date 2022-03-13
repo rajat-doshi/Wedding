@@ -8,11 +8,10 @@ import store from "../Redux/index";
 class Register extends React.Component {
   render() {
     return (
-        <Provider store={store}>     
-        <Head title="Register Form" />
-        <Nav />
+       <>
+        <Nav/>
         <RegisterComponent />
-        </Provider>
+        </>
     );
   }
 }

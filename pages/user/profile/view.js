@@ -68,9 +68,8 @@ const UserProfile = (props) => {
 
   return (
     <>
-    <Provider store={store}>
-      <Head />
-      <Nav />
+    
+     
       <div class="container-job">
         <div class="job-header">
           <div class="container">
@@ -151,7 +150,6 @@ const UserProfile = (props) => {
         </div>
       </div>
       <Footer />
-      </Provider>
     </>
   );
 };
