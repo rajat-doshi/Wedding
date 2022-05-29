@@ -109,19 +109,19 @@ const Filter = () => {
                 </form>
               </div>
               <div class="row">
-                <div class="col-6 col-md-3">
+                <div class="col-6 col-md-4">
                   <div class="search-job-statistics">
                     <div class="text">Total USERS</div>
                     <div class="num counter">{all_user_count}</div>
                   </div>
                 </div>
-                <div class="col-6 col-md-3">
+                <div class="col-6 col-md-4">
                   <div class="search-job-statistics">
                     <div class="text">Male</div>
                     <div class="num counter">{male_user_count}</div>
                   </div>
                 </div>
-                <div class="col-6 col-md-3">
+                <div class="col-6 col-md-4">
                   <div class="search-job-statistics">
                     <div class="text">Female</div>
                     <div class="num counter">{female_user_count}</div>

@@ -1,0 +1,117 @@
+body {font-family: 'Montserrat', sans-serif;}
+/**CUSTOM**/
+.container-header .header-nav ul li a.header-nav-link {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 1.7px;
+    color: #333;
+    text-transform: uppercase;
+}
+.container-search-job {
+    background: hsla(0,0%,94%,.8) url(https://hhp-blog.s3.amazonaws.com/2016/11/iStock_72610687_MEDIUM.jpg) top no-repeat;
+    background-size: cover;
+    padding: 120px 0;
+}
+.search-job-form label {
+    font-family: inherit;
+    color: #404040;
+}
+.container-search-job .search-job .search-job-title-new-job {
+    font-family: Roboto,Helvetica Neue,Arial,sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-align: center;
+    color: #333;
+    margin-bottom: 117px;
+    text-shadow: 0 0 5px white;
+}
+.container-search-job .search-job .search-job-statistics {
+    padding: 43px 38px 32px;
+    text-align: center;
+    background-color: #ffffff73;
+    border-radius: 14px;
+    transition: background-color .4s;
+}
+.container-post-jobs .post-job-list-view .list-view-item {
+    height:auto !important;
+    border-radius: 14px;
+    background-color: #fff;
+    border: 1px solid #e7e7e7;
+    padding: 20px;
+    margin-bottom: 16px;
+}
+    .container-post-jobs .post-job-list-view .list-view-item .item-post-job .item-logo {
+        width: 100px;
+        height: 100px;
+        margin-right: 27px;
+        border-radius: 50%;
+    }
+.container-job .job-header .title-job-post {
+    font-size: 33px;
+    font-weight: 700;
+    line-height: .67;
+    color: #df5684;
+}
+.job-content > img.profile-main {
+    max-width: 100%;
+    margin-bottom: 50px;
+}
+.no-padding{padding:0;}
+.container-post-jobs.post-jobs-related {
+    margin-top: 100px;
+}
+width-100{
+    width:100%;
+}
+.container-jobs-category .jobs-category-carousel .item .item-link {
+    display: block;
+    text-align: center;
+    padding: 34px 20px 35px;
+    border: 1px solid #f3f3f3;
+}
+.profile-social-connection a {
+    margin-right: 10px;
+}
+
+.container-awesome-company {
+    padding: 120px 0;
+    background: hsla(0,0%,94%,.8) url(https://hhp-blog.s3.amazonaws.com/2016/11/iStock_72610687_MEDIUM.jpg) top no-repeat;
+    background-size: cover;
+    padding: 100px 0;
+    height: calc(100vh - 89px);
+}
+.small-form {
+    display: block;
+    margin: auto;
+    float: none;
+    max-width: 500px;
+    padding: 40px;
+    border-radius: 20px;
+    background-color: hsla(0,0%,79%,.55);
+}
+label {
+    font-weight: 500;
+    color: #3a3a3a;
+    font-size: 14px;
+}
+.control-holder {
+    padding: 0 0 10px 0;
+}
+input.form-control {
+    border: none;
+    border-radius: 0;
+    background: #ffffffd1;
+    border-radius: 10px;
+}
+.container-header .header-link-action {    background: linear-gradient(90deg,#f4477d 0,#dd1e5a);color: #e44e78;}
+.container-header .header-link-action:hover span {background: linear-gradient(90deg,#f4477d 0,#d72d62);}
+.container-search-job .search-job .search-job-form .search-job-form-button {    background:linear-gradient(90deg,#f4477d 0,#f96090)}
+.container-search-job .search-job .search-job-form .search-job-form-button:hover{    background-color: #ff2f71;}
+.container-search-job .search-job .search-job-form {background: linear-gradient(90deg,#f4477d 0,#dd1e5a);}
+.search-job-form label {color:#fff}
+.container-header .header-nav ul li a.header-nav-link {color :#000}
+.container-header .header-nav ul li a.header-nav-link {font-weight: 500;}
+.container-search-job .search-job .search-job-statistics .text {    font-size: 20px;color: #f4477d;    font-weight: 700;    text-transform: uppercase;}
+.container-search-job .search-job .search-job-statistics {background-color: rgb(255 255 255 / 93%);}
+.container-footer .footer-line {    background-color: #fff;}

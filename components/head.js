@@ -21,9 +21,10 @@ const Head = (props) => (
       type="text/css"
     ></link>
     <link rel="manifest" href="./manifest.webmanifest"></link>
-    <link rel="shortcut icon" href="/static/images/logo/logo-site.png"/>
-    <link rel="apple-touch-icon" href="/static/images/logo/logo-site.png"/>
+    <link rel="shortcut icon" href="/static/images/logo/logo-site.png" />
+    <link rel="apple-touch-icon" href="/static/images/logo/logo-site.png" />
     <link rel="stylesheet" href="/static/css/style.min.css"></link>
+    <link rel="stylesheet" href="/static/css/custom.css"></link>
     {/* Css end */}
   </NextHead>
 );
